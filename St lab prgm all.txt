@@ -1,0 +1,818 @@
+1. ATM prgm
+
+
+package atm;
+import java.util.Scanner;
+
+public class atm123 {
+	
+	public static void main(String arg[]) {
+		int i=0, dpin=8123,ipin;
+		Scanner s=new Scanner(System.in);
+		do {
+			System.out.println("Please enter pin:");
+			ipin=s.nextInt();
+			if(ipin==dpin) {
+				menu();
+			}
+			else {
+				System.out.println("Wrong pin");
+				i++;
+			}
+		}while(i<3);
+	}
+	static void menu() {
+		int j=0,amt=6000;
+		do {
+			System.out.println("1. Deposit");
+			System.out.println("2. Withdraw");
+			System.out.println("3. Balance");
+			System.out.println("4. Exit");
+			Scanner choi=new Scanner(System.in);
+			int c=choi.nextInt();
+			
+			switch(c) {
+			case 1:
+				System.out.println("Enter the amount you want to deposit:");
+				Scanner d=new Scanner(System.in);
+				int dep=d.nextInt();
+				if(dep%500==0) {
+				amt+=dep;
+				System.out.println("Deposited");
+				}
+				else {
+					System.out.println("Enter in terms of 500");
+				}
+				
+				break;
+			case 2:
+				System.out.println("Enter the amount you want to withdraw:");
+				Scanner w=new Scanner(System.in);
+				int wd=w.nextInt();
+				if(wd%500==0) {
+				if(wd>amt) {
+					System.out.println("Balance insufficient.");
+					break;
+				}
+				else {
+					amt=amt-wd;
+				} }
+				else {
+					System.out.println("Enter in terms of 500");
+				}
+				break;
+			case 3:
+				System.out.println("Balance is:"+amt);
+				break;
+			case 4:
+				System.exit(0);
+			default:
+				System.out.println("Please enter correct value.");
+			}
+		}while(true);
+	}	
+
+}
+
+
+
+2. triangle problem
+
+
+package tri;
+
+import java.util.Scanner;
+
+public class tri123 {
+	public static void main(String[] args){
+		Scanner s=new Scanner(System.in);
+		int O=1;
+		do{
+		System.out.println("Enter 3 inputs which are the sides of a triangle");
+		int a=s.nextInt();
+		int b=s.nextInt();
+		int c=s.nextInt();
+		if(a<=200 && b<=200 && c<=200 && a>=1 && b>=1 && c>=1)
+		{
+		if(a<b+c && b<a+c && c<a+b){
+		if(a==b && b==c)
+		{
+		System.out.println("It is an equilateral triangle\n");
+		}
+		else if(a==b||b==c||c==a)
+		{
+		System.out.println("It is an isoceles triangle\n");
+		}
+		else
+		{
+		System.out.println("It is a scalene triangle\n");
+		}
+		}
+		else
+		System.out.println("It is not a triangle\n");
+		}
+		else
+		System.out.println("Invalid input\nEnter sides within the range 1-200\n");
+		System.out.println("1. To enter input\n 2.to exit\nEnter your choice ");
+		O=s.nextInt();
+		}while(O!=2);
+		s.close();
+		}
+		}
+
+
+3.BVA for next date
+
+
+package nextdate;
+
+public class Next {
+	public static String next(int d, int m, int y, int cc)
+	{
+	if(d==cc)
+	{
+	d=1;
+	if(m==12)
+	{
+	y++;
+	m=1;
+	}
+	else
+	{
+	m++;
+	}
+	}
+	else
+	{
+	d++;
+	}
+	return(String.valueOf(d)+"/"+String.valueOf(m)+"/"+String.valueOf(y));
+	}
+	public String nextday(int d, int m, int y)
+	{
+	if(d>=1 && d<=31 && m>=1 && m<=12 && y>=1812 && y<=2012)
+	{
+	switch(m)
+	{
+	case 1: 
+	case 3:return(next(d,m,y,31));
+	case 5:return(next(d,m,y,31));
+	case 7:return(next(d,m,y,31));
+	case 8:return(next(d,m,y,31));
+	case 10:return(next(d,m,y,31));
+	case 12: return(next(d,m,y,31));
+	case 4: return(next(d,m,y,30));
+	case 6: return(next(d,m,y,30));
+	case 9: return(next(d,m,y,30));
+	case 11: return(next(d,m,y,30));
+	default: return(next(d,m,y,((y%4==0 && y%100!=0) || y%400==0)?29:28));
+	}
+	}
+	return "Invalid Values";
+	}
+	}
+
+
+
+Robust Worst case
+
+package pgm3;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+import org.junit.Test;
+public class robustworstcase {
+@Test
+public void test() 
+{
+Next d1 = new Next();
+assertEquals(d1.nextd(25,3,2012),"26/3/2012");
+}
+@Test
+public void test1() 
+{
+Next d1 = new Next();
+assertEquals(d1.nextd(12,3,1925),"13/3/1925");
+}
+@Test
+public void test2() 
+{
+Next d1 = new Next();
+assertEquals(d1.nextd(30,3,1950),"31/3/1950");
+}
+@Test
+public void test3() 
+{
+Next d1 = new Next();
+assertEquals(d1.nextd(31,12,2010),"1/1/2011");
+}
+/*public void test4() 
+{
+Next d1 = new Next();
+assertEquals(d1.nextd(31,12,2010),"1/1/2010");
+}
+public void test5() 
+{
+Next d1 = new Next();
+assertEquals(d1.nextd(31,12,2010),"1/1/2010");
+}*/
+@Test
+public void test6() 
+{
+Next d1 = new Next();
+assertEquals(d1.nextd(12,3,1915),"13/3/1915");
+}
+@Test
+public void test7() 
+{
+Next d1 = new Next();
+assertEquals(d1.nextd(12,3,1920),"13/3/1920");
+}
+@Test
+public void test8() 
+{
+Next d1 = new Next();
+assertEquals(d1.nextd(31,12,2009),"1/1/2010");
+}
+@Test
+public void test9() 
+{
+Next d1 = new Next();
+assertEquals(d1.nextd(31,12,2000),"1/1/2001");
+}
+/*public void test12() 
+{
+Next d1 = new Next();
+assertEquals(d1.nextd(31,12,2019),"1/1/2020");
+}*/
+@Test
+public void test13() 
+{
+Next d1 = new Next();
+assertEquals(d1.nextd(31,12,1999),"1/1/2000");
+}
+@Test
+public void test10() 
+{
+Next d1 = new Next();
+assertEquals(d1.nextd(32,3,1914),"Enter valid dates");
+}
+@Test
+public void test11() 
+{
+Next d1 = new Next();
+assertEquals(d1.nextd(12,13,2021),"Enter valid dates");
+}
+}
+
+
+
+coverage Ecilema
+
+
+package pgm3;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class robustworstcase {
+@Test
+public void test1() 
+{
+nextdate d1 = new nextdate();
+assertEquals(d1.nextday(15,3,1912),"16/3/1912");
+}
+@Test
+public void test2() 
+{
+nextdate d1 = new nextdate();
+assertEquals(d1.nextday(15,4,1912),"16/4/1912");
+}
+@Test
+public void test3() 
+{
+nextdate d1 = new nextdate();
+assertEquals(d1.nextday(16,4,1912),"17/4/1912");
+}
+@Test
+public void test4() 
+{
+nextdate d1 = new nextdate();
+assertEquals(d1.nextday(15,3,1912),"16/3/1912");
+}
+@Test
+public void test5() 
+{
+nextdate d1 = new nextdate();
+assertEquals(d1.nextday(10,11,1920),"11/11/1920");
+}
+@Test
+public void test6() 
+{
+nextdate d1 = new nextdate();
+assertEquals(d1.nextday(13,15,1912),"Invalid inputs");
+}
+@Test
+public void test7() 
+{
+nextdate d1 = new nextdate();
+assertEquals(d1.nextday(32,1,1813),"Invalid inputs");
+}
+@Test
+public void test8() 
+{
+nextdate d1 = new nextdate();
+assertEquals(d1.nextday(7,1,1810),"Invalid inputs");
+}
+
+	
+	@Test
+	public void test9() 
+	{
+	nextdate d1 = new nextdate();
+	assertEquals(d1.nextday(7,10,1912),"8/10/1912");
+	}
+	@Test
+	public void test10() 
+	{
+	nextdate d1 = new nextdate();
+	assertEquals(d1.nextday(6,11,2011),"7/11/2011");
+	}
+	@Test
+	public void test11() 
+	{
+	nextdate d1 = new nextdate();
+	assertEquals(d1.nextday(18,8,2012),"19/8/2012");
+	}
+	@Test
+	public void test12() 
+	{
+	nextdate d1 = new nextdate();
+	assertEquals(d1.nextday(-1,15,1912),"Invalid inputs");
+	}
+	@Test
+	public void test13() 
+	{
+	nextdate d1 = new nextdate();
+	assertEquals(d1.nextday(6,-1,1810),"Invalid inputs");
+	}
+	@Test
+	public void test14() 
+	{
+	nextdate d1 = new nextdate();
+	assertEquals(d1.nextday(32,10,1811),"Invalid inputs");
+	}
+	@Test
+	public void test15() 
+	{
+	nextdate d1 = new nextdate();
+	assertEquals(d1.nextday(1,2,1912),"2/2/1912");
+	}
+	@Test
+	public void test16() 
+	{
+	nextdate d1 = new nextdate();
+	assertEquals(d1.nextday(5,6,2000),"6/6/2000");
+	}
+	@Test
+	public void test17() 
+	{
+	nextdate d1 = new nextdate();
+	assertEquals(d1.nextday(21,6,2000),"22/6/2000");
+	}
+	@Test
+	public void test18() 
+	{
+	nextdate d1 = new nextdate();
+	assertEquals(d1.nextday(-1,-1,-1),"Invalid inputs");
+	}
+	@Test
+	public void test19() 
+	{
+	nextdate d1 = new nextdate();
+	assertEquals(d1.nextday(31,1,2001),"1/2/2001");
+	}
+	@Test
+	public void test20() 
+	{
+	nextdate d1 = new nextdate();
+	assertEquals(d1.nextday(31,12,2001),"1/1/2002");
+	}
+	@Test
+	public void test21() 
+	{
+	nextdate d1 = new nextdate();
+	assertEquals(d1.nextday(0,0,2013),"Invalid inputs");
+	}
+	@Test
+	public void test22() 
+	{
+	nextdate d1 = new nextdate();
+	assertEquals(d1.nextday(28,2,2011),"1/3/2011");
+	}
+	@Test
+	public void test23() 
+	{
+	nextdate d1 = new nextdate();
+	assertEquals(d1.nextday(28,13,2012),"Invalid inputs");
+	}
+	@Test
+	public void test24() 
+	{
+	nextdate d1 = new nextdate();
+	assertEquals(d1.nextday(28,2,2012),"29/2/2012");
+	}
+	@Test
+	public void test25() 
+	{
+	nextdate d1 = new nextdate();assertEquals(d1.nextday(28,2,2000),"29/2/2000");
+	}
+	@Test
+	public void test26() 
+	{
+	nextdate d1 = new nextdate();
+	assertEquals(d1.nextday(31,1,1812),"1/2/1812");
+	}
+	@Test
+	public void test27() 
+	{
+	nextdate d1 = new nextdate();
+	assertEquals(d1.nextday(31,12,2012),"1/1/2013");
+	}
+	}
+
+
+
+
+
+
+
+5. traingle using ecilema
+
+package triangleeclemma;
+
+public class triangle {
+public String op(int a,int b,int c)
+{
+if(a>=1 && a<=200 && b>=1 && b<=200 && c>=1 && c<=200)
+{
+if(a+b>c && b+c>a && c+a>b)
+{
+if(a==b && b==c)
+{
+return "Equilateral Triangle";
+}
+else if(a==b||b==c)
+{
+return "Isosceles Triangle";
+}
+else
+{
+return "Scalen Triangle";
+}
+}
+else
+{
+return "Not a Triangle";
+}
+}
+else
+{
+return "Invalid";
+}
+}
+}
+
+
+j unit test
+
+
+package triangleeclemma;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class triangleTest {
+	@Test
+	public void test() {
+	triangle t1=new triangle();
+	assertEquals(t1.op(1, 2, 3),"Not a Triangle");
+	}
+	@Test
+	public void test12() {
+	triangle t1=new triangle();
+	assertEquals(t1.op(2, 1, 1),"Not a Triangle");
+	}
+	@Test
+	public void test13() {
+	triangle t1=new triangle();
+	assertEquals(t1.op(2, 4, 2),"Not a Triangle");
+	}
+	@Test
+	public void test1() {
+	triangle t1=new triangle();
+	assertEquals(t1.op(100, 100, 100),"Equilateral Triangle");
+	}
+	@Test
+	public void test2() {
+	triangle t1=new triangle();
+	assertEquals(t1.op(4, 5, 6),"Scalen Triangle");
+	}
+	@Test
+	public void test3() {
+	triangle t1=new triangle();
+	assertEquals(t1.op(4, 6, 6),"Isosceles Triangle");
+	}
+	@Test
+	public void test4() {
+	triangle t1=new triangle();
+	assertEquals(t1.op(201, 201, 201),"Invalid");
+	}
+	@Test
+	public void test5() {
+	triangle t1=new triangle();
+	assertEquals(t1.op(6, 6, 4),"Isosceles Triangle");
+	}
+	@Test
+	public void test6() {
+	triangle t1=new triangle();
+	assertEquals(t1.op(4, 201, 7),"Invalid");
+	}
+	@Test
+	public void test7() {
+	triangle t1=new triangle();
+	assertEquals(t1.op(4, 7, 201),"Invalid");
+	}
+	@Test
+	public void test8() {
+	triangle t1=new triangle();
+	assertEquals(t1.op(0, 7, 201),"Invalid");
+	}
+	@Test
+	public void test9() {
+	triangle t1=new triangle();
+	assertEquals(t1.op(7, 0, 201),"Invalid");
+	}
+	@Test
+	public void test11() {
+		triangle t1=new triangle();
+		assertEquals(t1.op(7, 9, 0),"Invalid");
+		}
+
+}
+
+
+
+8. login using selenium
+
+
+package pgm8;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class login {
+	public static void main(String[] args)
+	{
+	System.setProperty("webdriver.chrome.driver", 
+			"C:\\Users\\Pappu Sah\\Downloads\\chromedriver_win32\\chromedriver.exe");
+	ChromeDriver driver = new ChromeDriver();
+	 driver.get("https://demo.guru99.com/test/newtours/"); 
+	 driver.manage().window().maximize();
+	driver.findElement(By.name("userName")).sendKeys("mercury");
+	driver.findElement(By.name("password")).sendKeys("mercury");
+	driver.findElement(By.name("submit")).click();
+	}
+	 
+
+}
+
+
+
+
+9.no of links
+
+
+package pgm8;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+//import com.sun.tools.javac.util.List;
+
+public class login {
+	public static void main(String[] args){
+		System.setProperty("webdriver.chrome.driver","C:\\\\Users\\\\Pappu Sah\\\\Downloads\\\\chromedriver_win32\\\\chromedriver.exe");
+		ChromeDriver d=new ChromeDriver();
+		d.get("https://www.google.com/");
+		List <WebElement> a=d.findElements(By.xpath("//select"));
+		int linkcount=a.size();
+		System.out.println("total no of links ="+linkcount);
+		List <WebElement> b=d.findElements(By.xpath("//*"));
+		int elements=b.size();
+		System.out.println("total no of elements ="+elements);
+		}
+		}
+
+
+10.title and url
+
+
+package pgm8;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+
+public class login {
+	public static void main(String[] args) {
+	System.setProperty("webdriver.chrome.driver","C:\\Users\\Pappu Sah\\Downloads\\chromedriver_win32\\chromedriver.exe");
+	ChromeDriver driver = new ChromeDriver();
+	driver.get("https://www.google.co.in/");
+	driver.manage().window().maximize();
+	String str=driver.getTitle();
+	String str1=driver.getCurrentUrl();
+	System.out.println("title of this web is'"+str+"'");
+	System.out.println("url of this web is'"+str1+"'");
+
+	if(str.equals("Google") && str1.equals("https://www.google.co.in/") ){
+	 System.out.println(true);}
+
+	else {
+
+	System.out.println(false);
+	}
+
+
+	}
+	}
+
+11.  select deselect
+
+package pgm8;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+
+public class login {
+	public static void main(String[] args) throws InterruptedException {
+		 
+		 System.setProperty("webdriver.chrome.driver", 
+				 "C:\\Users\\Pappu Sah\\Downloads\\chromedriver_win32\\chromedriver.exe");
+		 WebDriver driver = new ChromeDriver();
+
+		 driver.get("https://demoqa.com/select-menu");
+		 driver.manage().window().maximize();
+		 Select select = new Select(driver.findElement(By.id("cars")));
+		 
+		 System.out.println("The dropdown options are -");
+		 List<WebElement> options = select.getOptions();
+		 for(WebElement option: options)
+		 System.out.println(option.getText());
+		 
+		 if(select.isMultiple()){
+		 
+		 System.out.println("Select option Opel by Index");
+		 select.selectByIndex(2);
+		 Thread.sleep(5000);
+		 
+		 System.out.println("Select option saab by Value");
+		 select.selectByValue("saab");
+		 Thread.sleep(5000);
+		 
+		 System.out.println("Select option Audi by Text");
+		 select.selectByVisibleText("Audi");
+		 Thread.sleep(5000);
+		 
+		 System.out.println("The selected values in the dropdown options are -");
+		 List<WebElement> selectedOptions = select.getAllSelectedOptions();
+		 for(WebElement selectedOption: selectedOptions)
+		 System.out.println(selectedOption.getText());
+		 
+		 System.out.println("DeSelect option Audi by Index");
+		 select.deselectByIndex(3);
+		 Thread.sleep(10000);
+		 
+		 System.out.println("Select option Opel by Text");
+		 select.deselectByVisibleText("Opel");
+		
+		 System.out.println("The selected values after deselect in the dropdown options are -");
+		 List<WebElement> selectedOptionsAfterDeselect = select.getAllSelectedOptions();for(WebElement selectedOptionAfterDeselect: selectedOptionsAfterDeselect)
+			 System.out.println(selectedOptionAfterDeselect.getText());
+		
+		 select.deselectAll();
+		 }
+		 driver.quit();
+		 }
+		}
+
+
+12.implicit and explicit
+
+implicit
+
+package pgm8;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+
+public class login {
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty ("webdriver.chrome.driver",
+		"C:\\\\Users\\\\Pappu Sah\\\\Downloads\\\\chromedriver_win32\\\\chromedriver.exe" 
+		);
+		ChromeDriver driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(10,TimeUnit.MINUTES) ;
+		String eTitle = "Demo Guru99 Page";
+		String aTitle = "" ;
+		// launch Chrome and redirect it to the Base URL
+		driver.get("http://demo.guru99.com/test/guru99home/" );
+		//Maximizes the browser window
+		driver.manage().window().maximize() ;
+		//get the actual value of the title
+		aTitle = driver.getTitle();
+		//compare the actual title with the expected title
+		if (aTitle.equals(eTitle))
+		{
+		System.out.println( "Test Passed") ;
+		}
+		else {System.out.println( "Test Failed" );
+		}
+		//close browser
+		driver.close();
+		}
+		}
+
+explicit
+
+package pgm8;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+
+public class login {
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty ("webdriver.chrome.driver",
+		"C:\\\\Users\\\\Pappu Sah\\\\Downloads\\\\chromedriver_win32\\\\chromedriver.exe" 
+		);
+		ChromeDriver driver = new ChromeDriver();
+		WebDriverWait wait=new WebDriverWait(driver, 10);
+		String eTitle = "Demo Guru99 Page";
+		String aTitle = "" ;
+		// launch Chrome and redirect it to the Base URL
+		driver.get("http://demo.guru99.com/test/guru99home/" );
+		//Maximizes the browser window
+		driver.manage().window().maximize() ;
+		//get the actual value of the title
+		aTitle = driver.getTitle();
+		//compare the actual title with the expected title
+		if (aTitle.contentEquals(eTitle))
+		{
+		System.out.println( "Test Passed") ;
+		}
+		else {
+		System.out.println( "Test Failed" );
+		}
+		//driver.close();
+		WebElement guru99=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath( 
+		"//a")));
+		guru99.click();
+		}
+		}
+
+
+
+
